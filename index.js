@@ -171,22 +171,24 @@ let stocks = [
   },
 ];
 
+
 //function Get the stocks sorted by pricing
-function priceHighToLow(stock1, stock2) {
+function priceLowToHigh(stock1, stock2) {
   return stock1.price - stock2.price;
 }
-function priceLowToHigh(stock1, stock2) {
+function priceHighToLow(stock1, stock2) {
   return stock2.price - stock1.price;
 }
 //Endpoint 1.1: Get the stocks sorted by pricing(low-to-high)
 app.get('/stocks/sort/pricing', (req, res) => {
   let stockCopy = stocks.slice();
   let pricing = req.query.pricing;
-  if (pricing === 'high-to-low') {
-    stockCopy.sort(priceHighToLow); // Sort high-to-low
+  if (pricing === 'low-to-high') {
+    stockCopy.sort(priceLowToHigh); // Sort high-to-low
   } else {
-    stockCopy.sort(priceLowToHigh); // Default: Sort low-to-high
+    stockCopy.sort(priceHighToLow); // Default: Sort low-to-high
   }
+
   res.json({ stocks: stockCopy });
 });
 //stocks/sort/pricing?pricing=high-to-low
